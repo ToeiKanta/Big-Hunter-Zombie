@@ -12,7 +12,6 @@ public class WeaponControl : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        
     }
 
     // Update is called once per frame
@@ -20,21 +19,28 @@ public class WeaponControl : MonoBehaviour
     {
         if(isPressed){
             Vector3 mousePos = Camera.main.WorldToScreenPoint (Input.mousePosition);
-            Vector2 direction = new Vector2(
-                mousePos.x - initPos.x,
-                mousePos.y - initPos.y
-            );
-            transform.up = direction;
+            if(mousePos != initPos){
+                Vector2 direction = new Vector2(
+                    mousePos.x - initPos.x,
+                    mousePos.y - initPos.y
+                );
+                transform.up = direction;
+                Debug.Log("rotate");
+            }
         }
+        Debug.Log("wait");
+        
     }
     private void OnMouseDown() {
         initPos = Camera.main.WorldToScreenPoint (Input.mousePosition);
         isPressed = true;
+        Debug.Log("press");
     }
 
     private void OnMouseUp()
     {
         isPressed = false;
+        Debug.Log("press up");
     }
     private void rotateToDirection(){
         //rotation
